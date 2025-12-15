@@ -39,6 +39,8 @@ public class UserService {
 
     // Tìm theo Email (dùng phương thức tùy chỉnh từ Repository)
     public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+        // Sử dụng .orElseThrow() để trả về User hoặc ném ra Exception nếu Optional rỗng
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
     }
 }

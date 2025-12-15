@@ -5,6 +5,8 @@ import k23cnt2.nvs_bansach.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/orders") // Ánh xạ cơ sở cho tất cả các API Order
 public class OrderController {
@@ -29,5 +31,10 @@ public class OrderController {
     public Order getOrderById(@PathVariable Long orderId) {
         // OrderService cần có phương thức findById
         return orderService.findById(orderId);
+    }
+    // GET /api/orders/history/1
+    @GetMapping("/history/{userId}")
+    public List<Order> getOrderHistory(@PathVariable Long userId) {
+        return orderService.findOrdersByUserId(userId);
     }
 }

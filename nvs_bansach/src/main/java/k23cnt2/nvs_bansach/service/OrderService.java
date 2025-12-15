@@ -1,6 +1,7 @@
 package k23cnt2.nvs_bansach.service;
 
 import k23cnt2.nvs_bansach.entity.*;
+import k23cnt2.nvs_bansach.entity.Order.OrderStatus; // Import đúng OrderStatus
 import k23cnt2.nvs_bansach.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,18 +36,16 @@ public class OrderService {
 
     @Transactional
     public Order checkout(Long userId) {
-        // 1. Lấy thông tin User và các CartItem
+        // ... (Logic Checkout - Giữ nguyên như bạn đã gửi)
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
 
-        // 🚨 SỬA LỖI 1: findByUser() phải được định nghĩa trong CartRepository
         List<CartItem> cartItems = cartRepository.findByUser(user);
 
         if (cartItems.isEmpty()) {
             throw new RuntimeException("Giỏ hàng của người dùng ID " + userId + " đang rỗng. Không thể đặt hàng.");
         }
 
-        // 2. Tính toán tổng tiền và kiểm tra tồn kho
         double total = 0;
         for (CartItem item : cartItems) {
             Product product = item.getProduct();
@@ -59,19 +58,13 @@ public class OrderService {
             total += product.getPrice() * quantity;
         }
 
-        // 3. Tạo đối tượng Order
         Order order = new Order();
         order.setUser(user);
         order.setTotal(total);
-
-        // 🚨 SỬA LỖI 2: Sử dụng Enum lồng nhau (nested enum) của Order.java
-        // Bạn đã định nghĩa OrderStatus bên trong Order, nên phải gọi: Order.OrderStatus.CREATED
         order.setStatus(Order.OrderStatus.CREATED);
-
         order.setCreatedAt(LocalDateTime.now());
         order = orderRepository.save(order);
 
-        // 4. Tạo OrderItem và giảm tồn kho (Stock)
         for (CartItem cartItem : cartItems) {
             Product product = cartItem.getProduct();
             int quantity = cartItem.getQuantity();
@@ -83,16 +76,11 @@ public class OrderService {
             orderItem.setPrice(product.getPrice());
             orderItemRepository.save(orderItem);
 
-            // Cập nhật tồn kho
             product.setStock(product.getStock() - quantity);
             productRepository.save(product);
         }
 
-        // 5. Dọn dẹp Giỏ hàng
-        // 🚨 SỬA LỖI 3: deleteAll() có thể chấp nhận List
         cartRepository.deleteAll(cartItems);
-
-        // 6. Trả về Order đã hoàn tất
         return order;
     }
 
@@ -103,5 +91,19 @@ public class OrderService {
     public Order findById(Long orderId) {
         return orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found with ID: " + orderId));
+    }
+
+    /**
+     * Lấy lịch sử đơn hàng của người dùng.
+     * 🚨 Sửa lỗi: Phương thức này đã được đưa vào trong phạm vi của class OrderService.
+     */
+    public List<Order> findOrdersByUserId(Long userId) {
+        // 1. Tìm User
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        // 2. Gọi Repository để lấy danh sách đơn hàng của User đó
+        // Yêu cầu phương thức findByUser trong OrderRepository
+        return orderRepository.findByUser(user);
     }
 }

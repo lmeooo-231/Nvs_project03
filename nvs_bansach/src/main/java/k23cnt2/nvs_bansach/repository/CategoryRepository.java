@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-
+    // Spring Data JPA sẽ tự động tạo các phương thức CRUD cơ bản (save, findById, findAll, delete,...)
 }
