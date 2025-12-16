@@ -39,12 +39,22 @@ public class JwtService {
 
     // Tạo token dựa trên UserDetails
     public String generateToken(UserDetails userDetails) {
-        // Thêm thông tin User ID và Role vào Claims
         Map<String, Object> claims = new HashMap<>();
+
+        // 🚨 TỐI ƯU HÓA: Trích xuất ROLE từ Authorities của Spring Security
+        // Điều này hoạt động bất kể UserDetails có phải là Entity User của bạn hay không
+        String role = userDetails.getAuthorities().stream()
+                .findFirst()
+                .map(authority -> authority.getAuthority().replace("ROLE_", ""))
+                .orElse("USER"); // Mặc định là USER nếu không tìm thấy quyền
+
+        claims.put("role", role);
+
+        // Trích xuất userId (chỉ khi đó là Entity User của bạn)
         if (userDetails instanceof User) {
             claims.put("userId", ((User) userDetails).getId());
-            claims.put("role", ((User) userDetails).getRole().name());
         }
+
         return buildToken(claims, userDetails.getUsername(), jwtExpiration);
     }
 

@@ -1,10 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ | Ứng Dụng Bán Sách</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* CSS tùy chỉnh */
+        .hero-section {
+            background-color: #f8f9fa; /* Màu nền sáng */
+            padding: 80px 0;
+        }
+        .book-card {
+            transition: transform 0.2s;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">NVS Bán Sách</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Trang Chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Sản Phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Giỏ Hàng</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Đăng nhập</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 text-primary">Khám phá thế giới tri thức</h1>
+        <p class="lead">Hàng ngàn đầu sách mới đang chờ bạn. Bắt đầu hành trình đọc ngay hôm nay!</p>
+        <a href="/products" class="btn btn-primary btn-lg mt-3">Xem tất cả Sách</a>
+    </div>
+</header>
+
+<section class="container my-5">
+    <h2 class="text-center mb-4">Sách Nổi Bật</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card book-card h-100 shadow-sm">
+                <img src="https://via.placeholder.com/300x400?text=Bia+Sach+1" class="card-img-top" alt="Bìa sách 1">
+                <div class="card-body">
+                    <h5 class="card-title">Tên Sách Lập Trình</h5>
+                    <p class="card-text text-muted">Tác giả: Nguyễn Văn A</p>
+                    <p class="card-text text-danger fs-5">150.000 VNĐ</p>
+                    <a href="/product-detail" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card book-card h-100 shadow-sm">
+                <img src="https://via.placeholder.com/300x400?text=Bia+Sach+2" class="card-img-top" alt="Bìa sách 2">
+                <div class="card-body">
+                    <h5 class="card-title">Tên Sách Kinh Doanh</h5>
+                    <p class="card-text text-muted">Tác giả: Trần Thị B</p>
+                    <p class="card-text text-danger fs-5">220.000 VNĐ</p>
+                    <a href="/product-detail" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card book-card h-100 shadow-sm">
+                <img src="https://via.placeholder.com/300x400?text=Bia+Sach+3" class="card-img-top" alt="Bìa sách 3">
+                <div class="card-body">
+                    <h5 class="card-title">Tên Sách Văn Học</h5>
+                    <p class="card-text text-muted">Tác giả: Lê Văn C</p>
+                    <p class="card-text text-danger fs-5">95.000 VNĐ</p>
+                    <a href="/product-detail" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>&copy; 2025 NVS Bán Sách. Mọi quyền được bảo lưu.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails; // 🚨 IMPORT
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-// 🚨 BƯỚC SỬA LỖI: Implement UserDetails
 public class User implements UserDetails {
 
     @Id
@@ -28,35 +27,28 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
 
-    private String password; // 🚨 Cần dùng trường này
+    private String password;
 
     private String phone;
 
     @Enumerated(EnumType.STRING)
-    private UserRole role; // 🚨 Cần dùng trường này
+    private UserRole role;
 
-    // ... (Các mối quan hệ OneToMany khác) ...
-
-    // =========================================================================
-    // 🚨 PHƯƠNG THỨC BẮT BUỘC CỦA USERDETAILS (Dành cho Spring Security)
-    // =========================================================================
-
-    // 1. Cung cấp quyền hạn (Authorities)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // 🚨 SỬA LỖI: Thêm kiểm tra Null cho 'role'
+
         if (this.role == null) {
-            // Nếu role bị null, trả về danh sách rỗng để tránh NPE
+
             return Collections.emptyList();
         }
-        // Trả về một Collection chứa quyền của User (ví dụ: "ROLE_USER" hoặc "ROLE_ADMIN")
-        return List.of(new SimpleGrantedAuthority(role.name()));
+
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
-    // 2. Tên người dùng (Tên đăng nhập)
+
     @Override
     public String getUsername() {
-        // Trong hệ thống của bạn, email được dùng làm username
+
         return email;
     }
 

@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm | NVS Bán Sách</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">NVS Bán Sách</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Trang Chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Sản Phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Giỏ Hàng</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Đăng nhập</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <div class="row">
+
+        <div class="col-md-5">
+            <img src="https://via.placeholder.com/400x550?text=Bia+Sach+Chi+Tiet" class="img-fluid rounded shadow" alt="Bìa sách">
+        </div>
+
+        <div class="col-md-7">
+            <h1 class="display-5 fw-bold">Tên Sách Chi Tiết: Nghệ Thuật Lập Trình Mã Sạch</h1>
+            <p class="lead text-muted">Tác giả: Robert C. Martin (Uncle Bob)</p>
+            <div class="mb-4">
+                <span class="badge bg-primary me-2">Lập trình</span>
+                <span class="badge bg-secondary">Kỹ năng mềm</span>
+            </div>
+
+            <div class="d-flex align-items-center mb-4">
+                <span class="text-danger fs-3 fw-bold me-3">250.000 VNĐ</span>
+                <span class="text-decoration-line-through text-muted">300.000 VNĐ</span>
+                <span class="badge bg-warning text-dark ms-3">Giảm 17%</span>
+            </div>
+
+            <p><strong>Tóm tắt:</strong> Đây là cuốn sách kinh điển về việc viết code dễ đọc, dễ bảo trì, và dễ mở rộng. Rất cần thiết cho mọi lập trình viên muốn nâng cao tay nghề.</p>
+
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item"><strong>Nhà xuất bản:</strong> NXB Tổng hợp TP.HCM</li>
+                <li class="list-group-item"><strong>Năm xuất bản:</strong> 2022</li>
+                <li class="list-group-item"><strong>Số trang:</strong> 450 trang</li>
+                <li class="list-group-item"><strong>Tình trạng:</strong> Còn hàng</li>
+            </ul>
+
+            <div class="d-flex align-items-center mb-5">
+                <input type="number" class="form-control me-3" style="width: 100px;" value="1" min="1" max="100">
+                <button class="btn btn-success btn-lg">
+                    <i class="bi bi-cart-plus"></i> Thêm vào Giỏ hàng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <h2>Mô Tả Chi Tiết</h2>
+    <p>Đây là nội dung mô tả chi tiết của sản phẩm, thường được lấy từ trường 'description' trong cơ sở dữ liệu. Nó bao gồm các đoạn văn bản dài hơn, giới thiệu chuyên sâu về nội dung cuốn sách và giá trị mà nó mang lại cho người đọc.</p>
+    <p>... (Nội dung đầy đủ) ...</p>
+</div>
+
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>&copy; 2025 NVS Bán Sách. Mọi quyền được bảo lưu.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

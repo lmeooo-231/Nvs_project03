@@ -22,7 +22,6 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final UserRepository userRepository;
 
-    // 🚨 CONSTRUCTOR: Tiêm Filter và Repository
     public SecurityConfig(JwtAuthenticationFilter jwtAuthFilter, UserRepository userRepository) {
         this.jwtAuthFilter = jwtAuthFilter;
         this.userRepository = userRepository;
@@ -53,12 +52,35 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Cho phép truy cập công khai
-                        .requestMatchers("/api/auth/**", "/api/products/**").permitAll()
 
-                        // KHÓA các API khác
+                        // 1. QUY TẮC CÓ PHÂN QUYỀN (Role-based) - Ưu tiên hàng đầu
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // 2. CÁC ĐƯỜNG DẪN CÔNG KHAI (permitAll) - Trang UI, Auth API, và Tài nguyên tĩnh
+                        .requestMatchers(
+                                "/",
+                                "/api/auth/**",
+                                "/api/products/**",
+                                "/products",
+                                "/cart",
+                                "/product-detail",
+                                "/login",
+                                "/register",
+                                "/checkout",
+                                "/order-success",
+                                "/profile",
+                                "/css/**", "/js/**",
+                                "/images/**"
+                        ).permitAll()
+
+                        // 3. CÁC ĐƯỜNG DẪN YÊU CẦU XÁC THỰC CHUNG (authenticated) - Trang Profile
+                        // Lưu ý: api/users/profile đã được gộp vào đây
+                        .requestMatchers("/profile", "/api/users/profile").authenticated()
+
+                        // 4. BẤT KỲ YÊU CẦU NÀO CÒN LẠI (anyRequest) - LUÔN LÀ CUỐI CÙNG
                         .anyRequest().authenticated()
                 )
+
                 // Cấu hình Session là STATELESS
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

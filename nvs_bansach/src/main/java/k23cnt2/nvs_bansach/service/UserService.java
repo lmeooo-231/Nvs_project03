@@ -37,10 +37,18 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    // Tìm theo Email (dùng phương thức tùy chỉnh từ Repository)
-    public User findUserByEmail(String email) {
-        // Sử dụng .orElseThrow() để trả về User hoặc ném ra Exception nếu Optional rỗng
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+    // ======================================================
+    // SỬA: Thay đổi kiểu trả về từ User sang Optional<User>
+    // ======================================================
+    public Optional<User> findUserByEmail(String email) {
+        // Giả định UserRepository có phương thức findByEmail trả về Optional
+        // Nếu UserRepository đã trả về Optional, ta chỉ cần return nó.
+        return userRepository.findByEmail(email);
+
+        /* * LƯU Ý: userRepository.findByEmail(String email) PHẢI trả về Optional<User>.
+         * Nếu phương thức này trong Repository của bạn trả về User,
+         * bạn sẽ cần phải sửa lại Repository hoặc bọc kết quả:
+         * * return Optional.ofNullable(userRepository.findByEmail(email));
+         */
     }
 }
